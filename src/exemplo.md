@@ -150,6 +150,22 @@ Encontre o custo mínimo para chegar em cada nó em, no máximo, 1 passo (partin
 
 Simples, não? Porém um passo não foi o bastante para chegar no ultimo nó, então vamos **relaxar** essa restrição.
 
+Para entender o que isso significa, primeiro faça o exercício abaixo:
+
+??? Exercício
+
+A partir do resultado do exercício anterior, calcule o custo mínimo para chegar no nó verde em apenas **um** nó adicional.
+
+::: Gabarito
+4
+:::
+
+???
+
+Como pode ver, usamos os resultados calculados no passo anterior para calcular o resultado nos passo seguintes.
+
+O processo de **relaxamante** nada mais é do que repetir esse processo para todos os nós do grafo em cada passo.
+
 ??? Exercício
 
 Encontre o custo mínimo para chegar em cada nó, agora em até 2 passos.
@@ -224,7 +240,7 @@ número de cruzamentos, informações do governo local e dados de milhares de
 outros condutores conectados na região.
 !!!
 
-## Implementando o algoritmo
+## Entendendo ciclos negativos
 
 Em resumo, a lógica do algoritmo de Bellman-Ford é a seguinte: Se o grafo tiver
 `md N` nós, então o caminho mais curto nunca conterá mais do que
@@ -236,12 +252,7 @@ dizer que existe um ciclo de peso negativo.
 
 Veja o exemplo abaixo de um grafo qualquer, extraído do [site](https://www.thecrazyprogrammer.com/2017/06/bellman-ford-algorithm-in-c-and-c.html).
 
-![](grafo-ex.png)
-
-| Nós       | s   | t   | x   | y   | z   |
-| --------- | --- | --- | --- | --- | --- |
-| Distância | 0   | ∞   | ∞   | ∞   | ∞   |
-| Caminho   | -   | -   | -   | -   | -   |
+![](iter0.png)
 
 Na 2° linha da tabela acima é apresentada a distância da fonte até o nó
 específico $(s, t, x, y, z)$. Na 3ª linha, mostra qual o nó visitado recentemente
@@ -253,54 +264,83 @@ Em cada iteração, a iteração `md N` significa que contém o caminho de no m�
 devemos seguir o gráfico que obtivemos na iteração anterior.
 !!!
 
+??? Exercício
+
 - {red}(Iteração 1)
 
-Aresta $(s,t)$ e $(z,y)$ relaxaram e as distâncias de $t$ e $y$ foram atualizadas.
+Considerando que as arestas $(s,t)$ e $(s,y)$ relaxaram e os nós de $t$ e $y$ foram atualizados. Como ficariam os valores em cada nó do grafo?
 
-![](bubble01.png)
+::: Gabarito
+![](iter1.png)
+:::
 
-| Nós       | s   | t   | x   | y   | z   |
-| --------- | --- | --- | --- | --- | --- |
-| Distância | 0   | 6   | ∞   | 7   | ∞   |
-| Caminho   | -   | s   | -   | s   | -   |
+???
+
+??? Exercício
 
 - {red}(Iteração 2)
 
-Aresta $(t,z)$ e $(y,x)$ relaxaram e os valores dos nós $x$ e $z$ foram atualizados.
+Considerando que as arestas $(t,z)$, $(t,y)$, $(y,z)$ e $(y,x)$ relaxaram e os valores dos nós $x$ e $z$ foram atualizados. Como ficariam os valores em cada nó do grafo?
 
-![](bubble02.png)
+::: Gabarito
+![](iter2.png)
+:::
 
-| Nós       | s   | t   | x   | y   | z   |
-| --------- | --- | --- | --- | --- | --- |
-| Distância | 0   | 6   | 4   | 7   | 2   |
-| Caminho   | -   | s   | y   | s   | -   |
+???
+
+??? Exercício
 
 - {red}(Iteração 3)
 
-Valor do nó $t$ atualizado pelo relaxamento da aresta $(x,t)$.
+Considerando que as arestas  $(z,s)$, $(z,x)$, $(x,t)$ relaxaram e o valor do nó $t$ foi atualizado. Como ficariam os valores em cada nó do grafo?
 
-![](bubble03.png)
+::: Gabarito
+![](iter3.png)
+:::
 
-| Nós       | s   | t   | x   | y   | z   |
-| --------- | --- | --- | --- | --- | --- |
-| Distância | 0   | 6   | 4   | 7   | 2   |
-| Caminho   | -   | x   | y   | s   | t   |
+???
+
+??? Exercício
 
 - {red}(Iteração 4)
 
-Valor do nó $z$ atualizado pelo relaxamento da aresta $(t,z)$.
+Considerando que as arestas $(t,y)$ e $(t,z)$ relaxaram e os valores de cada nó foram atualizados. Como ficariam os valores do grafo?
 
-![](bubble04.png)
+::: Gabarito
+![](iter4.png)
+:::
+
+???
+
+??? Exercício
 
 - {red}(Iteração 5)
 
 Nesse passo, temos que fazer mais uma iteração para descobrir se existe ciclo de
-peso negativo. Ao relaxarmos qualquer aresta obtida na 4ª iteração, podemos
-observar que não há chance de alterar esses valores. Portanto, concluímos que
-está tudo bem, não há ciclos negativos nesse grafo.
+peso negativo. Caso você relaxe alguma outra aresta obtida na 4° iteração, teríamos alteração dos valores dos nós?
 
-Vamos agora para a implementação do algoritmo em C. Para isso, vamos seguir
-alguns outros passos:
+::: Gabarito
+Perceba que após a 5° iteração, o relaxamento das arestas ocorreu de forma repetida. Além disso, podemos observar que não há chance de alterar esses valores.
+Portanto, concluímos que está tudo bem, **não** há ciclos negativos nesse grafo.
+:::
+
+???
+
+Resumo de como ficariam as iterações acima:
+
+;demo_iter
+
+Abaixo, temos um exemplo um pouco diferente. Com base no que foi mostrado acima e no conceito de ciclos negativos, 
+pense um pouco porque o grafo abaixo possui ciclo negativo e discuta com o seu grupo.
+
+![](negative_cicle.png)
+
+
+!!! Extra
+Iniciem abaixo apenas se já tiverem concluído tudo - ou se quiserem entender o algoritmo em C! :)
+!!!
+
+## Vamos agora para a implementação do algoritmo em C.
 
 ??? Checkpoint 1
 
