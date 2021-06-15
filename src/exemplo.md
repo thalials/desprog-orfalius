@@ -20,8 +20,8 @@ Quando se fala em custo, podemos pensar que está associado a algo de valor, no 
 
 - **Achar sequência de transformações químicas que consome menos energia**
 
-Utilizando o primeiro exemplo dado acima como base, vamos análisar as possíveis rotas de um táxi partindo de um ponto e com destino a
-outro na cidade de Manhattan.
+Utilizando o primeiro exemplo dado acima como base, vamos análisar as possíveis
+rotas de um táxi partindo de um ponto e com destino a outro na cidade de Manhattan.
 
 Nesse exemplo, vamos supor que a cada bloco/quarteirão percorrido pelo
 carro sem passageiro possui um custo de **1 unidade**. Para fins de
@@ -42,8 +42,9 @@ Como ele visa obter lucro com seu deslocamento na cidade, vamos avaliar algumas
 rotas possíveis que o ligam de **A** para **E** de modo seu custo (ou gasto)
 seja o menor possível.
 
-No primeiro caso abaixo, vamos supor que o taxista não quer fazer nenhum desvio. Então, o caminho é o mais intuitivo possível: a linha reta
-**AE**.
+No primeiro caso abaixo, vamos supor que o taxista não quer fazer nenhum desvio
+(considere um desvio como uma _corrida_ adicional. Cuidado para não confundir 
+com curvas) Então, o caminho é o mais intuitivo possível: a linha reta **AE**.
 
 ![figura_1](first_option/taxi_01.png)
 
@@ -105,7 +106,6 @@ O custo para realizar esse percurso é:
 
 :::
 ???
-
 
 Com as etapas que vimos até aqui, já é possível notar que, no mundo real, o
 "melhor caminho" entre dois pontos, nem sempre é uma reta.
@@ -187,10 +187,10 @@ E assim obtivemos o resultado! O caminho mínimo é aquele que incorre no custo 
 Sabemos que esse é o caminho mínimo, pois, como esse dígrafo tem 5 nós, o número máximo de passos sem passar duas vezes pelo mesmo nó é 4.
 
 !!! Curiosidade
-Caso o caminho mínimo passasse repetidamente pelo mesmo nó, isso caracterizaria um ciclo negativo, algo fora do escopo de nosso problema. 
+Caso o caminho mínimo passasse repetidamente pelo mesmo nó, isso caracterizaria um ciclo negativo, algo fora do escopo de nosso problema.
 !!!
- 
-Cada cálculo de custo mínimo de cada nó um certo número de passos seria uma iteração do algoritmo. 
+
+Cada cálculo de custo mínimo de cada nó um certo número de passos seria uma iteração do algoritmo.
 Em cada uma a restrição do número máximo de passos é relaxada, por isso esse tipo de cálculo é chamado de relaxamento.
 
 Como sabe-se que o número máximo de passos dados é `md N-1` , sendo que `md N` é o número de nós no dígrafo, após `md N-1` iterações desse cálculo, o algoritmo devolverá achará o caminho mínimo.
@@ -325,7 +325,7 @@ respectivamente). Elas também possuem pesos (weight).
 ??? Checkpoint 2
 
 Agora, vamos pensar um pouco sobre como ficaria a construção de uma struct para
-o grafo em si. 
+o grafo em si.
 
 Dica: Lembre-se de que o grafo é composto por nós (vértices) e arestas.
 
