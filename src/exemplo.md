@@ -20,7 +20,7 @@ Quando se fala em custo, podemos pensar que está associado a algo de valor, no 
 
 - **Achar sequência de transformações químicas que consome menos energia**
 
-Utilizando o primeiro exemplo dado acima como base, vamos análisar as possíveis
+Utilizando o primeiro exemplo dado acima como base, vamos analisar as possíveis
 rotas de um táxi partindo de um ponto e com destino a outro na cidade de Manhattan.
 
 Nesse exemplo, vamos supor que a cada bloco/quarteirão percorrido pelo
@@ -44,7 +44,7 @@ seja o menor possível.
 
 No primeiro caso abaixo, vamos supor que o taxista não quer fazer nenhum desvio
 (considere um desvio como uma _corrida_ adicional. Cuidado para não confundir 
-com curvas) Então, o caminho é o mais intuitivo possível: a linha reta **AE**.
+com curvas). Então, o caminho é o mais intuitivo possível: a linha reta **AE**.
 
 ![figura_1](first_option/taxi_01.png)
 
@@ -154,7 +154,7 @@ Para entender o que isso significa, primeiro faça o exercício abaixo:
 
 ??? Exercício
 
-A partir do resultado do exercício anterior, calcule o custo mínimo para chegar no nó verde em apenas **um** nó adicional.
+A partir do resultado do exercício anterior, calcule o custo mínimo para chegar no nó verde com apenas **um** passo a mais.
 
 ::: Gabarito
 4
