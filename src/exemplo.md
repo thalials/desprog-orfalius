@@ -6,18 +6,11 @@ O algoritmo de Bellman-Ford é um dos algoritmos de busca de caminho de custo m�
 que se destaca de outros como [Dijkstra](https://pt.wikipedia.org/wiki/Algoritmo_de_Dijkstra) pois suporta dígrafos com arestas de
 valor negativo. Entretanto, ele não suporta dígrafos em que existam ciclos negativos.
 
-Uma vez que o algoritmo descarta a possibilidade de ciclos negativos, sabe-se que o caminho minimo não percorrerá o mesmo nó mais de uma vez. Por isso, sabe-se o número maximo de movimentos será menor do que o número de nós no dígrafo.
-
-Assim, o algoritmo funcionará iterando `md N-1` vezes, sendo que `md N` é o número de nós no dígrafo. Em cada iteração ele checará cada aresta de cada nó para achar o minimo caminho com as informações já calculadas, em um processo chamado relaxamento. Ou seja, na primeira iteração ele calculará para cada nó o minimo caminho à partir do início em um movimento, na segunda calculará o minimo caminho para dois movimentos e assim por diante.
-
-Assim, tendo como entrada o dígrafo analisado e o nó inicial e final, ele devolverá saida o caminha mínimo.
-
 ![](directed.png|15)
 
 A imagem acima é um exemplo de grafo direcionado.
 
-Esse tipo de análise pode ser útil para analisar diversas situações, exemplos
-incluem:
+Quando se fala em custo, podemos pensar que está associado a algo de valor, no entanto, esse 'custo' pode representar diversos pontos em diferentes contextos. A seguir alguns exemplos:
 
 - **Achar percurso de maior lucro de um táxi, nas quais são considerados os gastos com combustível e pedágio, e os ganhos com o preço das viagens**
 
@@ -27,11 +20,7 @@ incluem:
 
 - **Achar sequência de transformações químicas que consome menos energia**
 
-Para entender melhor, vamos analisar o caso abaixo.
-
-## Percurso de um táxi em Manhattan
-
-Vamos análisar as possíveis rotas de um táxi partindo de um ponto e com destino a
+Utilizando o primeiro exemplo dado acima como base, vamos análisar as possíveis rotas de um táxi partindo de um ponto e com destino a
 outro na cidade de Manhattan.
 
 Nesse exemplo, vamos supor que a cada bloco/quarteirão percorrido pelo
@@ -53,7 +42,7 @@ Como ele visa obter lucro com seu deslocamento na cidade, vamos avaliar algumas
 rotas possíveis que o ligam de **A** para **E** de modo seu custo (ou gasto)
 seja o menor possível.
 
-No primeiro caso abaixo, dado que o taxista não quer fazer nenhum desvio, o caminho é o mais intuitivo possível: a linha reta
+No primeiro caso abaixo, vamos supor que o taxista não quer fazer nenhum desvio. Então, o caminho é o mais intuitivo possível: a linha reta
 **AE**.
 
 ![figura_1](first_option/taxi_01.png)
