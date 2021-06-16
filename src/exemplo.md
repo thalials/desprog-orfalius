@@ -3,8 +3,8 @@
 # O Algoritmo de Bellman-Ford
 
 O algoritmo de Bellman-Ford é um dos algoritmos de busca de caminho de custo mínimo,
-que se destaca de outros como [Dijkstra](https://pt.wikipedia.org/wiki/Algoritmo_de_Dijkstra) pois suporta dígrafos com arestas de
-valor negativo. Entretanto, ele não suporta dígrafos em que existam ciclos negativos.
+que se destaca de outros como [Dijkstra](https://pt.wikipedia.org/wiki/Algoritmo_de_Dijkstra), pois suporta dígrafos com arestas de
+valor negativo, com algumas exceções.
 
 ![](directed.png|15)
 
@@ -64,7 +64,7 @@ Qual o custo para percorrer essas rotas?
 
 ::: Gabarito
 
-O único caminho possivel é o que está representado abeixo. (A rota **ABE** não é por limitações do contexto)
+O único caminho possivel é o que está representado abaixo. (A rota **ABE** não é por limitações do contexto)
 
 ![figura_2](second_option/taxi_02.png)
 
@@ -124,7 +124,7 @@ Agora que temos noção do tipo de problema que pode ser resolvido por meio do a
 
 ??? Exercício
 
-Encontre o caminho mínimo do nó vermelho ao nó verde:
+Encontre o caminho de custo mínimo do nó vermelho ao nó verde:
 
 ![](ExDesprog.png)
 
@@ -164,11 +164,11 @@ A partir do resultado do exercício anterior, calcule o custo mínimo para chega
 
 Como pode ver, usamos os resultados calculados no passo anterior para calcular o resultado nos passo seguintes.
 
-O processo de **relaxamante** nada mais é do que repetir esse processo para todos os nós do grafo em cada passo.
+O processo de **relaxamento** nada mais é do que repetir esse processo para todos os nós do grafo em cada passo.
 
 ??? Exercício
 
-Encontre o custo mínimo para chegar em cada nó, agora em até 2 passos.
+Usando os custos calculados para um passo calcule o valor do custo mínimo para chegar em todos os nós com até dois passos.
 
 ::: Gabarito
 ![](step2.jpeg)
@@ -180,7 +180,7 @@ Como pode ver, alguns caminhos para chegar em certos nós são mais eficientes, 
 
 ??? Exercício
 
-Agora encontre o custo mínimo para chegar em cada nó em até 3 passos.
+Com base nos valores previamente obtidos, relaxe o custo mínimo de todos os nós para mais um passo.
 
 ::: Gabarito
 ![](step3.jpeg)
@@ -190,7 +190,7 @@ Agora encontre o custo mínimo para chegar em cada nó em até 3 passos.
 
 ??? Exercício
 
-Agora encontre o custo mínimo para chegar em cada nó em até 4 passos.
+Com base nos valores previamente obtidos, relaxe o custo mínimo de todos os nós para mais um passo.
 
 ::: Gabarito
 ![](step4.jpeg)
@@ -209,7 +209,7 @@ Caso o caminho mínimo passasse repetidamente pelo mesmo nó, isso caracterizari
 Cada cálculo de custo mínimo de cada nó um certo número de passos seria uma iteração do algoritmo.
 Em cada uma a restrição do número máximo de passos é relaxada, por isso esse tipo de cálculo é chamado de relaxamento.
 
-Como sabe-se que o número máximo de passos dados é `md N-1` , sendo que `md N` é o número de nós no dígrafo, após `md N-1` iterações desse cálculo, o algoritmo devolverá achará o caminho mínimo.
+Como sabe-se que o número máximo de passos dados é `md N-1` , sendo que `md N` é o número de nós no dígrafo, após `md N-1` iterações desse cálculo, o algoritmo achará o caminho mínimo.
 
 Observe a animação abaixo para ver o processo novamente:
 
@@ -244,8 +244,7 @@ outros condutores conectados na região.
 
 Em resumo, a lógica do algoritmo de Bellman-Ford é a seguinte: Se o grafo tiver
 `md N` nós, então o caminho mais curto nunca conterá mais do que
-`md N-1` arestas. É suficiente relaxar cada aresta `md V-1` vezes para encontrar o
-caminho mais curto. No entanto, lembre-se que devemos ter cuidado com ciclos
+`md N-1` arestas. No entanto, lembre-se que devemos ter cuidado com ciclos
 negativos. Nesse caso, para saber se eles existem ou não, fazemos `md +1`
 relaxamento. Se obtivermos uma menor distância no n-ésimo relaxamento, podemos
 dizer que existe um ciclo de peso negativo.
@@ -254,9 +253,8 @@ Veja o exemplo abaixo de um grafo qualquer, extraído do [site](https://www.thec
 
 ![](iter0.png)
 
-Na 2° linha da tabela acima é apresentada a distância da fonte até o nó
-específico $(s, t, x, y, z)$. Na 3ª linha, mostra qual o nó visitado recentemente
-que alcança o nó da coluna.
+Na linha associada a distância, cada coluna é representada com o valor da distância da fonte até o nó específico.
+Na linha associada ao caminho, mostra qual o último nó visitado e antes de alcançar o nó atual.
 
 !!! Nota
 Em cada iteração, a iteração `md N` significa que contém o caminho de no máximo
